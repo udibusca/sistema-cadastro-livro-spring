@@ -2,6 +2,7 @@ package com.biblioteca.resource;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -24,7 +25,7 @@ import com.biblioteca.repository.CategoriaRepository;
 
 @RestController
 @RequestMapping(value = "/categorias")
-@CrossOrigin(origins = "http://localhost")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CategoriaResource {
 
 	@Autowired
@@ -58,6 +59,12 @@ public class CategoriaResource {
 		} catch (EmptyResultDataAccessException e) {
 			return ResponseEntity.notFound().build();
 		}
+	}
+	
+	@GetMapping(value = "{codigo}")
+	public ResponseEntity<Optional<Categoria>> findById(@PathVariable Integer codigo) {
+		Optional<Categoria> categorias = repository.findById(codigo);
+		return ResponseEntity.ok().body(categorias);
 	}
 
 }

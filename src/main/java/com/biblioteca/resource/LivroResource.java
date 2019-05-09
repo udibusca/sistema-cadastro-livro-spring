@@ -2,6 +2,7 @@ package com.biblioteca.resource;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -24,7 +25,7 @@ import com.biblioteca.repository.LivroRepository;
 
 @RestController
 @RequestMapping(value = "/livros")
-@CrossOrigin(origins = "http://localhost")
+@CrossOrigin(origins = "http://localhost:4200")
 public class LivroResource {
 
 	@Autowired
@@ -62,4 +63,9 @@ public class LivroResource {
 		return ResponseEntity.ok().body(livros);
 	}
 
+	@GetMapping(value = "{codigo}")
+	public ResponseEntity<Optional<Livro>> findById(@PathVariable Integer codigo) {
+		Optional<Livro> livros = repository.findById(codigo);
+		return ResponseEntity.ok().body(livros);
+	}
 }
