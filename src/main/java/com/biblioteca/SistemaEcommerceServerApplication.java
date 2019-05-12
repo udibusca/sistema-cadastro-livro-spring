@@ -9,8 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.biblioteca.model.Categoria;
 import com.biblioteca.model.Editora;
+import com.biblioteca.model.Livro;
 import com.biblioteca.repository.CategoriaRepository;
 import com.biblioteca.repository.EditoraRepository;
+import com.biblioteca.repository.LivroRepository;
 
 @SpringBootApplication
 public class SistemaEcommerceServerApplication implements CommandLineRunner {
@@ -19,6 +21,8 @@ public class SistemaEcommerceServerApplication implements CommandLineRunner {
 	private CategoriaRepository repoCategoria;
 	@Autowired
 	private EditoraRepository repoEditora;
+	@Autowired
+	private LivroRepository repoLivro;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SistemaEcommerceServerApplication.class, args);
@@ -73,6 +77,14 @@ public class SistemaEcommerceServerApplication implements CommandLineRunner {
 		Editora edit12 = new Editora("Grupo Editorial Record‎");
 		Editora edit13 = new Editora("Grupo Escala de Publicações‎");
 		this.repoEditora.saveAll(Arrays.asList(edit1,edit2,edit3,edit4,edit5,edit6,edit7,edit8,edit9,edit10,edit11,edit12,edit13));
+		
+		Livro l = Livro.builder().isbn("1298889").titulo("Novo Livro").autor("Caramuro").categoria(cat1).editora(edit1).build();
+		Livro l2 = Livro.builder().isbn("5678989").titulo("Horizonte").autor("Forbider").categoria(cat2).editora(edit2).build();
+		Livro l3 = Livro.builder().isbn("0098755").titulo("Carreto").autor("Mendingo").categoria(cat3).editora(edit3).build();
+		Livro l4 = Livro.builder().isbn("5654433").titulo("Velho Verão").autor("TechFlow").categoria(cat4).editora(edit4).build();
+		Livro l5 = Livro.builder().isbn("0909876").titulo("Livro dos Mortos").autor("MoreTi").categoria(cat5).editora(edit5).build();
+		
+		repoLivro.saveAll(Arrays.asList(l,l2,l3,l4,l5));
 
 	}
 
