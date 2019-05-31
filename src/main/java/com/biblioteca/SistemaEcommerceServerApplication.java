@@ -10,9 +10,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.biblioteca.model.Categoria;
 import com.biblioteca.model.Editora;
 import com.biblioteca.model.Livro;
+import com.biblioteca.model.User;
 import com.biblioteca.repository.CategoriaRepository;
 import com.biblioteca.repository.EditoraRepository;
 import com.biblioteca.repository.LivroRepository;
+import com.biblioteca.repository.UserRepository;
 
 @SpringBootApplication
 public class SistemaEcommerceServerApplication implements CommandLineRunner {
@@ -23,6 +25,8 @@ public class SistemaEcommerceServerApplication implements CommandLineRunner {
 	private EditoraRepository repoEditora;
 	@Autowired
 	private LivroRepository repoLivro;
+	@Autowired
+	private UserRepository repository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SistemaEcommerceServerApplication.class, args);
@@ -85,6 +89,16 @@ public class SistemaEcommerceServerApplication implements CommandLineRunner {
 		Livro l5 = Livro.builder().isbn("0909876").titulo("Livro dos Mortos").autor("MoreTi").categoria(cat5).editora(edit5).build();
 		
 		repoLivro.saveAll(Arrays.asList(l,l2,l3,l4,l5));
+		
+		User usuario1 = User.builder()
+				.email("user@email.com")
+				.password("123456")
+				.build();
+		User usuario2 = User.builder()
+				.email("usuario@email.com")
+				.password("123456")
+				.build();
+		repository.saveAll(Arrays.asList(usuario1,usuario2));
 
 	}
 
